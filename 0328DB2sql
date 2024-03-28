@@ -1,0 +1,60 @@
+-- DML(Data Manipulation Language)
+-- 데이터를 조회(SELECT), 삭제(DELETE), 입력(INSERT), 변경(UPDATE) 등으로 데이터를 조작하는데 사용하는 구문 입니다.
+
+CREATE TABLE DEPT_TEMP
+AS SELECT * FROM DEPT;
+
+SELECT * FROM DEPT_TEMP;
+
+INSERT INTO dept_temp(deptno, dname, loc) VALUES(50, 'DATABASE', 'SEOUL');
+
+INSERT INTO dept_temp VALUES(60, 'NETWORK', 'BUSAN');
+
+INSERT INTO dept_temp(deptno, loc) VALUES(70, 'SUWON');
+
+INSERT INTO dept_temp VALUES(80, 'Moblie', '');
+
+CREATE TABLE emp_temp
+AS SELECT * FROM emp
+WHERE 1 != 1; -- 모두 거짓인 경우에 사용하는 조건절
+
+SELECT * FROM emp_temp;
+INSERT INTO emp_temp VALUES(9001, '나영석', 'PRESIDENT', NULL, '2010/01/01', 9900, 1000, 10);
+INSERT INTO EMP_TEMP(EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
+        VALUES (9002, '이은지', 'MANAGER', 9999, '2020-04-05', 5500, 800, 20);
+INSERT INTO EMP_TEMP(EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
+        VALUES (9002, '미미', 'MANAGER', 9999, TO_DATE('2021/07/01', 'YYYY/MM/DD'), 5500, 800, 20);
+INSERT INTO EMP_TEMP(EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
+        VALUES (9002, '안유진', 'MANAGER', 9999, SYSDATE, 5000, 800, 20);
+DESC emp_temp; -- 테이블 정보 조회
+
+INSERT INTO EMP_TEMP(EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
+        SELECT E.EMPNO, E.ENAME, E.JOB, E.MGR, E.HIREDATE, E.SAL, E.COMM, E.DEPTNO
+        FROM EMP E, SALGRADE S
+        WHERE E.SAL BETWEEN S.LOSAL AND S.HISAL
+            AND S.GRADE = 1;
+SELECT * FROM EMP_TEMP;
+
+-- 테이블에 있는 데이터 수정하기(UPDATE)
+CREATE TABLE dept_temp2
+AS SELECT * FROM dept;
+SELECT * FROM dept_temp2;
+
+UPDATE dept_temp2
+    SET loc = 'suwon';
+ROLLBACK; -- 되돌리기
+
+UPDATE DEPT_TEMP2
+    SET loc = '대전'
+WHERE deptno = 40;
+
+DELETE FROM DEPT_TEMP2 WHERE loc = 'suwon';
+DELETE FROM DEPT_TEMP2; -- 전체 삭제
+
+
+
+
+
+
+
+
